@@ -11,11 +11,13 @@ function init() {
     
     // Variables declarations
     const searchBtn = document.querySelector('#searchBtn')
+    const startDateBtn = document.querySelector('#startDate')
+    const endDateBtn = document.querySelector('#endDate')
 
-    const startDateInput = document.querySelector('#startDate')
+    //default date set
+    let startDate = ``
+    let endDate = ``;
 
-
-    let userStr = '';
 
 
     //function calls
@@ -26,7 +28,7 @@ function init() {
 
     //functions declarations
     async function getNASAPics() {
-        let url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=3&hd=false&thumbs=false`;
+        let url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&hd=false&thumbs=false&start_date=${startDate}&end_date=${endDate}`;
         const response = await fetch(url);
         const nasaData = await response.json();
         console.log(nasaData);
@@ -34,13 +36,24 @@ function init() {
         generateCards(nasaData);
       }
 
+    // eventListeners
     function initEventListeners(){
         searchBtn.addEventListener('click', (e) => {
             console.log('clicked')
+
+            // let url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=7&hd=false&thumbs=false&start_date=${startDate}&endDate=${endDate}`;
+            // console.log(url)
+
             getNASAPics();
         })
         
-        startDateInput.addEventListener('input', (e) => {
+        startDateBtn.addEventListener('input', (e) => {
+            startDate = e.target.value 
+            console.log(e.target.value)
+        })
+
+        endDateBtn.addEventListener('input', (e) => {
+            endDate = e.target.value 
             console.log(e.target.value)
         })
         
@@ -49,24 +62,27 @@ function init() {
 
 // TODO account for num of a photos
 function generateCards(arr){
-    // console.log('generate cards',obj)
     
     const appContents = document.querySelector("#app-contents")
 
-    let appContentsHTML = `
-        <div class="card col-span-1 rounded-2xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
-            <div class="text-4xl p-4">${arr[0].title}</div>
-            <img src="${arr[0].url}" alt="${arr[0].title}">
-            <div class="text-lg p-1">Date: ${arr[0].date}</div>
-            <p class="p-4">${arr[0].explanation}</p>
-        </div>
-        `
+    let appContentsHTML = ``
 
+    arr.forEach((obj) => {
+        appContentsHTML +=`
+            <div class="card col-span-2 max-w-2xl rounded-2xl  overflow-hidden bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl relative">
+                <img src="${obj.url}" alt="${obj.title}" 
+                    class="object-cover w-full">
+                <h1 class="absolute inset-0 text-3xl font-bold">${obj.title}</h1>
+                <div class="text-lg p-1">Date: ${obj.date}</div>
+                <p class="absolute inset-0">Description: ${obj.explanation}</p>
+            </div>
+            `
+    })
 
     appContents.innerHTML = appContentsHTML
 }
 
 
 
-// eventListeners
+
 

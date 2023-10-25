@@ -11,6 +11,10 @@
     --accent1: #3b66c9;
 }
 
+*{
+    transition: .5s ease-in-out;
+}
+
 #body-ctn{
-    background-color: var(--background1);
+    /* background-color: var(--background1); */
 }
