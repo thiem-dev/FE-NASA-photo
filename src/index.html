@@ -1,3 +1,7 @@
+<!-- TODO
+-add hovered image
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,28 +24,44 @@
             
             <div class="date-ctn basis-2/4 flex-grow bg-slate-100 shadow-md hover:bg-slate-200 h-14 p-3 rounded-l-xl text-center text-lg">
                 <label for="start">Start date:</label>
-                <input type="date" id="start" name="start" />
-                <label for="end">End date:</label>
-                <input type="date" id="end" name="end" />
+                <input type="date" id="startDate" name="start" />
+                <!-- <label for="end">End date:</label>
+                <input type="date" id="endDate" name="end" /> -->
             </div>
             
-            <button id="searchBtn" class="basis-1/8 flex-grow rounded-r-xl border-1 bg-white shadow-md hover:bg-slate-200">Search</button>
+            <button id="searchBtn" class="basis-1/8 flex-grow rounded-r-xl border-1 bg-white shadow-md hover:bg-slate-200">Generate Space Stuff</button>
         </div>
 
         <div class="app-ctn">
-            <div class="app-contents grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 my-16 mx-10 content-evenly justify-center text-center">
-                <div class="card col-span-1 rounded-2xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
-                    <div class="text-4xl p-4">Monday</div>
-                    <img src="../assets/sun.png" alt="Sunny">
-                    <div class="text-lg p-1">Sunny: 70F</div>
-                    <p class="p-4">I'm so cold, i can use my nose drippings as chopsticks. oh well, i guess i'm not wearing any pants today! squidward, you're steaming. you're like a steamed vegetable, only smarter.</p>
+            <!-- <div id="app-contents" class="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 my-16 mx-10 content-evenly justify-center text-center"> -->
+                <div id="app-contents" class="grid grid-flow-col gap-4 my-16 mx-10 content-evenly justify-center text-center">
+                <div id="highlighted-stories" class="grid grid-flow-row grid-rows-2">
+                    <div class="card col rounded-2xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
+                        <div class="text-2xl p-4">A Jupiter Vista from Juno</div>
+                        <img src="https://apod.nasa.gov/apod/image/0907/message_dutil.gif" alt="nasa image of the day" class="object-contain w-full h-32 sm:h-48">
+                    </div>
+    
+                    <div class="card col-span-1 rounded-2xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
+                        <div class="text-2xl p-4">Geminid Fireball over Mount Balang</div>
+                        <img src="https://apod.nasa.gov/apod/image/1412/GeminidMtBalang_wu_960.jpg" alt="nasa image of the day" class="object-contain">
+                        <div class="text-lg p-1">Sunny: 70F</div>
+                        <p class="p-4">I'm so cold, i can use my nose drippings as chopsticks. oh well, i guess i'm not wearing any pants today! squidward, you're steaming. you're like a steamed vegetable, only smarter.</p>
+                    </div>
                 </div>
-              </div>
-        </div>
+                
+                <div id="smaller-stories" class="grid-rows-2">
+                    
+                </div>
+
+            </div> <!-- end app-contents -->
+            
+
+          
+        </div> <!-- end app-ctn -->
 
         
 
-    </div>
+    </div> <!-- end body-ctn -->
 </body>
 <script src="./main.js"></script>
 </html>
