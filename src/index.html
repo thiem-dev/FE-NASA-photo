@@ -7,10 +7,40 @@
     <link href="../dist/output.css" rel="stylesheet">
 </head>
 <body>
-    <div class="body-ctn">
-        <div class="app-ctn">
-            <div id="app-contents" class=""></div>
+    
+    <div class="bg-img-ctn -z-10 w-full h-full blur-md"></div>
+
+    <div class="body-container justify-center flex flex-row flex-wrap mx-auto w-full">
+        <div class="title-ctn w-full my-12">
+            <h1 class="text-amber-400 text-9xl text-center">NASA Photo of the Day</h1>
         </div>
+
+        <div class="user-ctn container flex flex-row flex-wrap mt-2 my-4" >
+            <!-- <input type="text" id="userInput" placeholder="What do you want to know?" class="basis-3/4 flex-grow bg-slate-100 shadow-md hover:bg-slate-200 h-6 p-5 rounded-l-xl text-center text-lg " > -->
+            
+            <div class="date-ctn basis-2/4 flex-grow bg-slate-100 shadow-md hover:bg-slate-200 h-14 p-3 rounded-l-xl text-center text-lg">
+                <label for="start">Start date:</label>
+                <input type="date" id="start" name="start" />
+                <label for="end">End date:</label>
+                <input type="date" id="end" name="end" />
+            </div>
+            
+            <button id="searchBtn" class="basis-1/8 flex-grow rounded-r-xl border-1 bg-white shadow-md hover:bg-slate-200">Search</button>
+        </div>
+
+        <div class="app-ctn">
+            <div class="app-contents grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 my-16 mx-10 content-evenly justify-center text-center">
+                <div class="card col-span-1 rounded-2xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
+                    <div class="text-4xl p-4">Monday</div>
+                    <img src="../assets/sun.png" alt="Sunny">
+                    <div class="text-lg p-1">Sunny: 70F</div>
+                    <p class="p-4">I'm so cold, i can use my nose drippings as chopsticks. oh well, i guess i'm not wearing any pants today! squidward, you're steaming. you're like a steamed vegetable, only smarter.</p>
+                </div>
+              </div>
+        </div>
+
+        
+
     </div>
 </body>
 <script src="./main.js"></script>
