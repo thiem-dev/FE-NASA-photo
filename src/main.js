@@ -1,3 +1,8 @@
+/* TODO  
+-if date doesn't exist yet then alert wrong date (or shake and focus wrong), toggle active class and remove after delay
+*/
+
+
 // let nasaData;
 window.addEventListener('DOMContentLoaded', (event) => {
     init();
@@ -49,12 +54,12 @@ function init() {
         
         startDateBtn.addEventListener('input', (e) => {
             startDate = e.target.value 
-            console.log(e.target.value)
+            console.log('start date', e.target.value)
         })
 
         endDateBtn.addEventListener('input', (e) => {
             endDate = e.target.value 
-            console.log(e.target.value)
+            console.log('end date', e.target.value)
         })
         
     }

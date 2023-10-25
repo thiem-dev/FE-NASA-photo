@@ -36,28 +36,38 @@
         </div>
 
         <div class="app-ctn m-auto">
-            <!-- <div id="app-contents" class="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 my-16 mx-10 content-evenly justify-center text-center"> -->
-                <div id="app-contents" class="grid grid-flow-row grid-cols-8 gap-8 my-16 mx-10 justify-evenly content-center">
+                <div id="app-contents" class="grid grid-flow-row grid-cols-1 sm:grid-cols-4 md:grid-cols-8 gap-8 my-16 mx-10 justify-evenly content-center">
 
-                    <div class="card col-span-2 max-w-2xl max-h- rounded-2xl overflow-hidden bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl relative text-center justify-center">
-                        <img src="https://apod.nasa.gov/apod/image/0907/message_dutil.gif" alt="nasa image of the day" 
-                            class="object-cover w-full">
+                    <div class="card group relative col-span-2 max-h-[900px] rounded-2xl overflow-hidden text-center justify-center items-center cursor-pointer bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl 
+                         ">
+                        <div class="img-ctn h-96 w-96 block">
+                            <img src="https://apod.nasa.gov/apod/image/0907/message_dutil.gif" alt="nasa image of the day" 
+                            class="object-cover w-full h-full group-hover:scale-110">
+                        </div>
+
+                        <div class="curtain absolute inset-0 bg-transparent group-hover:bg-gray-800/80"></div>
+
+                        <div class="text-ctn absolute inset-0 flex flex-col text-gray-100 px-9 translate-y-[120%] overflow-hidden group-hover:translate-y-[30%]" >
+                            <h1 class="text-3xl font-bold">Title</h1>
+                            <div class="text-lg p-1">Date: 10-15-2023</div>
+                            <p class="overflow-hidden">Description: Atmospheric refraction flattened the solar disk and Atmospheric refraction flattened the solar disk and</p>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="card col-span-2 max-w-2xl rounded-2xl overflow-hidden bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl relative">
+                        <!-- <img src="https://apod.nasa.gov/apod/image/1412/GeminidMtBalang_wu_960.jpg" alt="nasa image of the day" 
+                            class="object-cover w-full inset-0"> -->
                         <h1 class="absolute inset-0 text-3xl font-bold">Title</h1>
                         <div class="text-lg p-1 absolute inset-0">Date: 10-15-2023</div>
                         <p class="absolute inset-0">Description: Atmospheric refraction flattened the solar disk and Atmospheric refraction flattened the solar disk and</p>
                     </div>
 
                     <div class="card col-span-2 max-w-2xl rounded-2xl overflow-hidden bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl relative">
-                        <img src="https://apod.nasa.gov/apod/image/1412/GeminidMtBalang_wu_960.jpg" alt="nasa image of the day" 
-                            class="object-cover w-full inset-0">
-                        <h1 class="absolute inset-0 text-3xl font-bold">Title</h1>
-                        <div class="text-lg p-1 absolute inset-0">Date: 10-15-2023</div>
-                        <p class="absolute inset-0">Description: Atmospheric refraction flattened the solar disk and Atmospheric refraction flattened the solar disk and</p>
-                    </div>
-
-                    <div class="card col-span-2 max-w-2xl rounded-2xl overflow-hidden bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl relative">
-                        <img src="https://apod.nasa.gov/apod/image/2106/IMG_3915.jpg" alt="nasa image of the day" 
-                            class="object-cover w-full inset-0">
+                        <!-- <img src="https://apod.nasa.gov/apod/image/2106/IMG_3915.jpg" alt="nasa image of the day" 
+                            class="object-cover w-full inset-0"> -->
                         <h1 class="absolute inset-0 text-3xl font-bold">Title</h1>
                         <div class="text-lg p-1 absolute inset-0">Date: 10-15-2023</div>
                         <p class="absolute inset-0">Description: Atmospheric refraction flattened the solar disk and Atmospheric refraction flattened the solar disk and</p>
