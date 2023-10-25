@@ -12,11 +12,14 @@
 </head>
 <body>
     
-    <div class="bg-img-ctn -z-10 w-full h-full blur-md"></div>
+    <!-- <div class="bg-img-ctn -z-10 w-full h-full blur-md"></div> -->
 
-    <div class="body-container justify-center flex flex-row flex-wrap mx-auto w-full">
-        <div class="title-ctn w-full my-12">
-            <h1 class="text-amber-400 text-9xl text-center">NASA Photo of the Day</h1>
+    <div id="body-ctn" class="justify-center flex flex-row flex-wrap mx-auto w-full">
+        <div class="title-ctn w-full my-12 text-center">
+            <h1 class="text-amber-800 text-9xl ">NASA Photo of the Day</h1>
+            <p class="text-lg mt-10">Instructions: </p>
+            <p class="">Input the date range. Max range 7 days</p>
+            <p class="">Press button then watch the magic</p>
         </div>
 
         <div class="user-ctn container flex flex-row flex-wrap mt-2 my-4" >
@@ -34,27 +37,33 @@
 
         <div class="app-ctn">
             <!-- <div id="app-contents" class="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 my-16 mx-10 content-evenly justify-center text-center"> -->
-                <div id="app-contents" class="grid grid-flow-col gap-4 my-16 mx-10 content-evenly justify-center text-center">
-                <div id="highlighted-stories" class="grid grid-flow-row grid-rows-2">
-                    <div class="card col rounded-2xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
-                        <div class="text-2xl p-4">A Jupiter Vista from Juno</div>
-                        <img src="https://apod.nasa.gov/apod/image/0907/message_dutil.gif" alt="nasa image of the day" class="object-contain w-full h-32 sm:h-48">
-                    </div>
-    
-                    <div class="card col-span-1 rounded-2xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
-                        <div class="text-2xl p-4">Geminid Fireball over Mount Balang</div>
-                        <img src="https://apod.nasa.gov/apod/image/1412/GeminidMtBalang_wu_960.jpg" alt="nasa image of the day" class="object-contain">
-                        <div class="text-lg p-1">Sunny: 70F</div>
-                        <p class="p-4">I'm so cold, i can use my nose drippings as chopsticks. oh well, i guess i'm not wearing any pants today! squidward, you're steaming. you're like a steamed vegetable, only smarter.</p>
-                    </div>
-                </div>
-                
-                <div id="smaller-stories" class="grid-rows-2">
-                    
-                </div>
+                <div id="app-contents" class="grid grid-flow-row grid-cols-1 md:grid-cols-8 flex-wrap gap-8 gap-y-12 my-16 mx-10 content-evenly">
 
-            </div> <!-- end app-contents -->
-            
+                    <img 
+                        src="https://apod.nasa.gov/apod/image/0907/message_dutil.gif" alt="nasa image of the day" 
+                        class="card object-cover w-full h-3/6 col-span-4 rounded-3xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
+                        
+                    <img 
+                        src="https://apod.nasa.gov/apod/image/1412/GeminidMtBalang_wu_960.jpg" alt="nasa image of the day" 
+                        class="card object-cover w-full h-3/6  col-span-4 rounded-3xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
+
+                    <!-- smaller stories -->
+                    <div class="card col-span-2 rounded-2xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
+                        <img src="https://apod.nasa.gov/apod/image/2106/IMG_3915.jpg" alt="nasa image of the day" class="">
+                    </div>
+
+                    <div class="card col-span-2 rounded-2xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
+                        <img src="https://apod.nasa.gov/apod/image/2106/IMG_3915.jpg" alt="nasa image of the day" class="">
+                    </div>
+
+                    <div class="card col-span-2 rounded-2xl bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl">
+                        <img src="https://apod.nasa.gov/apod/image/2106/IMG_3915.jpg" alt="nasa image of the day" class="">
+                    </div>
+
+                </div><!-- end app-contents -->
+                    
+
+
 
           
         </div> <!-- end app-ctn -->
