@@ -12,9 +12,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
-    
-    <video autoplay loop muted id="bgvideo" class="-z-50 fixed min-h-[110%] min-w-[110%] my-0 scale-[1.6]">
-        <source src="../public/The_Earth_in_480p.webm" class="object-fill w-full h-full">
+
+    <video autoplay loop muted id="bgvideo" class="-z-50 fixed top-0 left-0 h-auto w-[300%] lg:w-[150%] overflow-hidden">
+        <source src="../public/The_Earth_in_480p.webm" class="object-cover object-center w-[110%] h-[110%]">
     </video>
     <div class="curtain fixed bg-black opacity-60 w-[110%] h-[110%]"></div>
 
@@ -23,8 +23,8 @@
         <img id="closeModalBtn" src="../public/Xshape.png" alt="Close Modal button" class="invert absolute top-4 right-4 w-10 hover:invert-[70%]">
         
         <div id="modal-contents" class="">
-            <div class="img-ctn basis-12 my-2">
-                <img src="https://apod.nasa.gov/apod/image/2310/HiResSprites_Escurat_3000.jpg" alt="nasa image of the day" class="w-[60%] object-cover object-center mx-auto">
+            <div class="img-ctn basis-11/12 mt-8 w-[40vw]">
+                <img src="https://apod.nasa.gov/apod/image/2310/HiResSprites_Escurat_3000.jpg" alt="nasa image of the day" class="object-contain object-center mx-auto">
             </div>
             
             <h1 class="text-xl md:text-3xl basis-12">Sprite Lightning in High Definition</h1>
@@ -36,20 +36,29 @@
 
 
     <div id="body-ctn" class="justify-center flex flex-row flex-wrap mx-auto w-full h-full relative">
-        <div id="title-ctn" class="w-full my-12 text-center ">
-            <h1 class="text-9xl myText-gradient font-semibold font-sans">NASA PHOTOS</h1>
-            <p class="text-lg mt-10 text-white">Find images that out of this world </p>
+
+        <div id="volumeBtn" class="absolute top-1 right-3 w-[100px] h-[100px]">
+            <img src="../public/volume.svg" alt="volume button" class="invert">
         </div>
 
-        <div class="input-ctn w-10/12 flex flex-row flex-wrap mt-2 my-4  rounded-md" >  
+        <div id="title-ctn" class="w-full my-12 text-center ">
+            <h1 class="text-9xl myText-gradient font-semibold font-sans">NASA PHOTOS</h1>
+            <p class="text-4xl mt-10 text-gray-300/50">Find images that are out of this world </p>
+        </div>
+
+        <div class="input-ctn w-10/12 flex flex-row flex-wrap mt-2 my-4 gap-8 rounded-md justify-center" >  
+
             <div class="date-ctn basis-2/4 flex-grow h-14 p-2 text-center lg:text-2xl text-md flex justify-evenly gap-3 rounded-xl ">
                 <label class="text-white" for="start">Start date:</label>
                 <input  type="date" id="startDate" name="start" class="basis-1/3 border-gray-100/75 border-1 opacity-50 bg-gray-500 text-white hover:opacity-90 w-full rounded-lg p-3 pt-2" />
                 <label class="text-white" for="end">End date:</label>
                 <input  type="date" id="endDate" name="end" class="basis-1/3 border-gray-100/75 border-1 opacity-50 bg-gray-500 text-white hover:opacity-90 w-full rounded-lg p-3 pt-2" />
             </div>
+
+            <button id="searchBtn" class="basis-2/12 flex-grow rounded-xl border-1 bg-gray-500/50 text-white hover:bg-gray-500/90 font-bold text-lg p-3">Make Space Stuff</button>
+        
+            <button id="randomBtn" class="basis-2/12 flex-grow rounded-xl border-1 bg-gray-500/50 text-white hover:bg-gray-500/90 font-bold text-lg p-5">Randomize</button>
             
-            <button id="searchBtn" class="basis-1/8 flex-grow rounded-xl border-1 bg-gray-500/50 text-white hover:bg-gray-500/90 font-bold text-lg p-3">Make Space Stuff</button>
         </div>
 
         

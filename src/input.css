@@ -19,6 +19,12 @@ html{
     transition: .75s ease-in-out;
 }
 
+video{
+    max-width:none;
+    max-height: none;
+}
+
+
 
 
 

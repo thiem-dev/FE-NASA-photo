@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 function init() {
     initQselectors();
     initEventListeners();
-    initFirstCards();
+    makeRandomCards();
 }
 
 
@@ -23,6 +23,9 @@ const interactiveElements = {
     searchBtn: `#searchBtn`,
     loadingIcon: `#loading-icon`,
     scrollToTop: `#scrollToTop`,
+    volumeBtn: `#volumeBtn`,
+    randomBtn: `#randomBtn`,
+    bgvideo: `#bgvideo`,
 }
 
 // wish I could hide api keys but this is on Github static page (i think there is a way)
@@ -91,6 +94,24 @@ function initEventListeners(){
     iElem.closeModalBtn.addEventListener('click', (e) => {
         iElem.modalCtn.classList.add('hidden')
     })
+
+    // // TODO
+    iElem.volumeBtn.addEventListener('click', (e) => {
+        console.log(`volume clicked`)
+        iElem.bgvideo.muted = true;
+        // if(iElem.bgvideo.volume === 0){
+        //     iElem.bgvideo.volume = 1
+        // }else{
+        //     iElem.bgvideo.volume = 0
+        // }
+
+
+        
+    })
+
+    iElem.randomBtn.addEventListener(`click`, (e) =>{
+        makeRandomCards()
+    })
     
     cards.forEach(card => {
         card.addEventListener('click', (e) =>{
@@ -104,7 +125,7 @@ function initEventListeners(){
     })
 }
 
-async function initFirstCards(){
+async function makeRandomCards(){
     const loadingIcon = iElem.loadingIcon.classList;
 
     loadingIcon.toggle('hidden')
@@ -140,9 +161,8 @@ async function getNASAPics() {
         console.error(error)
         toast.fail(error)
     }
-    loadingIcon.toggle('hidden')
+    loadingIcon.toggle('hidden');
     generateCards(dataConfig.nasaData);
-
 }
 
 function checkDates(startDate, endDate){
@@ -241,4 +261,3 @@ function showScrollToTop(){
         iElem.scrollToTop.classList.remove('translate-y-0');
     }
 }
-
