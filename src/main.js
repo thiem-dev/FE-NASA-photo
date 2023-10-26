@@ -4,6 +4,10 @@
 
 
 let nasaData = [];
+const closeModalBtn = document.querySelector('#closeModalBtn')
+const modalCtn = document.querySelector('#modal-ctn')
+const modalContents = document.querySelector('#modal-contents')
+
 
 window.addEventListener('DOMContentLoaded', (event) => {
     init();
@@ -59,21 +63,19 @@ function init() {
     async function getNASAPics() {
         let response;
 
-        //empty dates
+        //if empty dates
         if(!startDate || !endDate ){
-            alert('empty dates');
+            alert('cannot have empty dates');
             startDateBtn.parentElement.classList.toggle("bg-red-500/50")
             setTimeout(()=>{
                 startDateBtn.parentElement.classList.toggle("bg-red-500/50")
             }, 3000)
-
-            return;
+            return; //do nothing
         }
 
-        let url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&hd=false&thumbs=false&start_date=${startDate}&end_date=${endDate}`;
-
         loadingIcon.classList.toggle('hidden')
-        
+
+        let url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&hd=false&thumbs=false&start_date=${startDate}&end_date=${endDate}`;
         try {
             response = await fetch(url);
             nasaData = await response.json();
@@ -82,7 +84,6 @@ function init() {
             console.error('Error: did not get NASA Pics', error)
             failToast(error)
         }
-
         loadingIcon.classList.toggle('hidden')
         generateCards(nasaData);
         
@@ -90,12 +91,9 @@ function init() {
 
     // eventListeners
     function initEventListeners(){
-
         const cards = document.querySelectorAll(".card") 
         
-        searchBtn.addEventListener('click', () => {
-            getNASAPics();
-        })
+        searchBtn.addEventListener('click', getNASAPics())
         
         startDateBtn.addEventListener('input', (e) => {
             startDate = e.target.value 
@@ -105,20 +103,27 @@ function init() {
             endDate = e.target.value 
         })
         
-
+        closeModalBtn.addEventListener('click', (e) => {
+            modalCtn.classList.add('hidden')
+        })
+        
         cards.forEach(card => {
             card.addEventListener('click', (e) =>{
-                console.log('clicked on', e.target.parentElement.id)
+                if(e.target.id === null){
+                    return //ignore
+                } else{
+                    modalCtn.classList.remove('hidden')
+                }
+                
             })
         })
+
     }
 
 
 }
 
-// TODO account for num of a photos
 function generateCards(arr){
-    
     const appContents = document.querySelector("#app-contents")
 
     //empty out contents
@@ -147,30 +152,43 @@ function generateCards(arr){
     })
 
     appContents.innerHTML = appContentsHTML
-
-
     const cards = document.querySelectorAll(".card") 
-    initCardListeners(cards)
+    initNewCardListeners(cards)
 
 }
 
-function initCardListeners(cardElements){
-
+function initNewCardListeners(cardElements){
     cardElements.forEach(card => {
         card.addEventListener('click', (e) => {
-            // console.log('clicked on', e.target.parentElement.id)
-            loadModal(e.target.parentElement.id)
+            if(e.target.id === null){
+                return //ignore
+            } else{
+                loadModal(e.target.parentElement.id)
+                modalCtn.classList.remove('hidden')
+            }
         })
     })
-
-    //arr[i].addEventListener{this.id}
 }
-
 
 function loadModal(id){
     console.log(nasaData[id])
 
-    
+    // data check on author
+    let author = Object.hasOwn(nasaData[id], 'copyright') ? nasaData[id].copyright : 'Unknown'
+
+    modalContents.innerHTML = '';
+
+    modalContents.innerHTML = `
+                <div class="img-ctn basis-12 my-2">
+                    <img src="${nasaData[id].url}" alt="nasa image of the day" class="w-[60%] object-cover object-center mx-auto">
+                </div>
+                
+                <h1 class="text-xl md:text-3xl basis-12">${nasaData[id].title}</h1>
+                <h2 class="text-lg md:text-2xl basis-12">Date: ${nasaData[id].date}</h2>
+                <h3 class=" md:text-xl basis-12">Photo by: ${author}</h3>
+                <p class="text-left basis-5 px-24 mb-12">${nasaData[id].explanation}</p>
+                `
+
 }
 
 
