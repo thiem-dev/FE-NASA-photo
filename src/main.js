@@ -1,7 +1,19 @@
 /* TODO  
 */
 
+window.addEventListener('DOMContentLoaded', (event) => {
+    // init();
+    console.log('DOM fully loaded and parsed');
+});
 
+function init() {
+    initQselectors();
+    initEventListeners();
+    initFirstCards();
+}
+
+
+//global objs
 const interactiveElements = {
     closeModalBtn : `#closeModalBtn`,
     modalCtn : `#modal-ctn`,
@@ -47,21 +59,7 @@ const toast = {
     }
 }
 
-
 const iElem = interactiveElements;
-
-
-window.addEventListener('DOMContentLoaded', (event) => {
-    init();
-    console.log('DOM fully loaded and parsed');
-});
-
-
-function init() {
-    initQselectors();
-    initEventListeners();
-}
-
 
 // utility functions -----------------------------------------------------------------------------------------------------------------------------------
 
@@ -106,7 +104,19 @@ function initEventListeners(){
     })
 }
 
-function initSampleData(){
+async function initFirstCards(){
+    const loadingIcon = iElem.loadingIcon.classList;
+
+    loadingIcon.toggle('hidden')
+
+    const url = `https://api.nasa.gov/planetary/apod?api_key=${dataConfig.API_KEY}&count=8`
+    let response = await fetch(url)
+    dataConfig.nasaData = await response.json();
+
+    generateCards(dataConfig.nasaData);
+
+
+    loadingIcon.toggle('hidden')
     
 }
 
@@ -132,12 +142,9 @@ async function getNASAPics() {
         console.error(error)
         toast.fail(error)
     }
-
     loadingIcon.toggle('hidden')
 
-    try{
-        generateCards(dataConfig.nasaData);
-    } catch (e) {console.error(e)}
+    generateCards(dataConfig.nasaData);
 
 }
 
@@ -146,12 +153,10 @@ function checkDates(startDate, endDate){
         alert('missing date information');
 
         //highlight error
-        iElem.startDateBtn.parentElement.classList.toggle("pulse")
         iElem.startDateBtn.parentElement.classList.toggle("bg-red-500/50")
         setTimeout(()=>{
-            iElem.startDateBtn.parentElement.classList.toggle("pulse")
             iElem.startDateBtn.parentElement.classList.toggle("bg-red-500/50")
-        }, 4000)
+        }, 3000)
 
         return false;
     } else{
@@ -160,11 +165,6 @@ function checkDates(startDate, endDate){
 }
 
 function generateCards(arr){
-    // if(Array.isArray(arr)){
-    //     console.log(arr)
-    //     // throw new Error(`${arr} is not an array`)
-    // }
-
     const appContents = document.querySelector("#app-contents")
 
     //empty out contents
@@ -216,7 +216,9 @@ function loadModal(id){
     let nasaData = dataConfig.nasaData
 
     // data check on author
-    let author = Object.hasOwn(nasaData[id], 'copyright') ? nasaData[id].copyright : 'Unknown'
+    let author = nasaData?.[id]?.hasOwnProperty('copyright') ? nasaData[id].copyright : 'Unknown';
+
+    console.log(nasaData)
 
     iElem.modalContents.innerHTML = '';
 

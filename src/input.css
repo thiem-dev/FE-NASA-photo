@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html{
+    scroll-behavior: smooth;
+}
 
 :root {
     --text1: #fefdfb;
@@ -9,21 +12,20 @@
     --primary1: #899dcd;
     --secondary1: #745107;
     --accent1: #3b66c9;
+
 }
 
 *{
-    transition: .5s ease-in-out;
-}
-
-#bg-img-ctn{
-    /* background-image: url("../public/space1md.jpg");
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-    width:100vw; */
+    transition: .75s ease-in-out;
 }
 
 
-#body-ctn{
-    /* background-color: var(--background1); */
+
+
+
+.myText-gradient{
+    background: linear-gradient(108deg,#fafafabd,#375cb0ad);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
