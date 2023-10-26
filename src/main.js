@@ -1,12 +1,53 @@
 /* TODO  
--if date doesn't exist yet then alert wrong date (or shake and focus wrong), toggle active class and remove after delay
 */
 
 
-let nasaData = [];
-const closeModalBtn = document.querySelector('#closeModalBtn')
-const modalCtn = document.querySelector('#modal-ctn')
-const modalContents = document.querySelector('#modal-contents')
+const interactiveElements = {
+    closeModalBtn : `#closeModalBtn`,
+    modalCtn : `#modal-ctn`,
+    modalContents : `#modal-contents`,
+    startDateBtn: `#startDate`,
+    endDateBtn: `#endDate`,
+    searchBtn: `#searchBtn`,
+    loadingIcon: `#loading-icon`,
+}
+
+// wish I could hide api keys but this is on Github static page (i think there is a way)
+const dataConfig = {
+    nasaData : [],
+    API_KEY: `3qTHhoutarfLnx81918TdVY6FpFTFEW5ijlwA0P1`,
+    startDate: ``,
+    endDate: ``,
+}
+
+const toast = {
+    success: () => {
+        Toastify({
+            text: `Fetch Success!`,
+            duration: 2000,
+            gravity: "top",
+            close: true,
+            position:"center",
+            style: {
+                background: "linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61))"
+            }
+            }).showToast()
+    },
+    fail: () => {
+        Toastify({
+            text: `Error with getting pics ${error.name}`,
+            duration: 3000,
+            gravity: "top",
+            close: true,
+            position:"center",
+            style: {
+                background: "linear-gradient(to right, rgb(255, 95, 109), rgb(255, 195, 113))"
+            }
+            }).showToast()
+    }
+}
+
+const iElem = interactiveElements;
 
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -16,116 +57,115 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 function init() {
-    // wish I could hide api keys but this is on Github static page (i think there is a way)
-    const API_KEY = `3qTHhoutarfLnx81918TdVY6FpFTFEW5ijlwA0P1`
-    
-    // Variables declarations
-    const searchBtn = document.querySelector('#searchBtn')
-    const startDateBtn = document.querySelector('#startDate')
-    const endDateBtn = document.querySelector('#endDate')
-    const loadingIcon = document.querySelector('#loading-icon')
 
-    const successToast = () => {
-                            Toastify({
-                                text: `Fetch Success!`,
-                                duration: 2000,
-                                gravity: "top",
-                                close: true,
-                                position:"center",
-                                style: {
-                                    background: "linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61))"
-                                }
-                                }).showToast()
-                            }
-
-    const failToast = (error) => {
-                            Toastify({
-                                text: `Error with getting pics ${error.name}`,
-                                duration: 3000,
-                                gravity: "top",
-                                close: true,
-                                position:"center",
-                                style: {
-                                    background: "linear-gradient(to right, rgb(255, 95, 109), rgb(255, 195, 113))"
-                                }
-                                }).showToast()
-                            }
-
-    //default date set
-    let startDate = ``
-    let endDate = ``;
-
-    //function calls
+    //init function calls
+    initQselectors();
     initEventListeners();
+}
 
 
-    //functions declarations
-    async function getNASAPics() {
-        let response;
 
-        //if empty dates
-        if(!startDate || !endDate ){
-            alert('cannot have empty dates');
-            startDateBtn.parentElement.classList.toggle("bg-red-500/50")
-            setTimeout(()=>{
-                startDateBtn.parentElement.classList.toggle("bg-red-500/50")
-            }, 3000)
-            return; //do nothing
-        }
 
-        loadingIcon.classList.toggle('hidden')
 
-        let url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&hd=false&thumbs=false&start_date=${startDate}&end_date=${endDate}`;
-        try {
-            response = await fetch(url);
-            nasaData = await response.json();
-            successToast();
-        } catch (error){
-            console.error('Error: did not get NASA Pics', error)
-            failToast(error)
-        }
-        loadingIcon.classList.toggle('hidden')
-        generateCards(nasaData);
+
+// utility functions -----------------------------------------------------------------------------------------------------------------------------------
+
+function initQselectors(){
+    for(let [elem, selector] of Object.entries(iElem)){
+        iElem[elem] = document.querySelector(selector)
+    }
+}
+
+function initEventListeners(){
+    const cards = document.querySelectorAll(".card") 
+
+
+    iElem.searchBtn.addEventListener('click', () => {
+        if(!checkDates(startDate, endDate)){ return } //if empty dates
+
+        getNASAPics()
+    })
+    
+    iElem.startDateBtn.addEventListener('input', (e) => {
+        dataConfig.startDate = e.target.value 
+    })
+
+    iElem.endDateBtn.addEventListener('input', (e) => {
+        dataConfig.endDate = e.target.value 
         
-      }
+    })
+    
+    iElem.closeModalBtn.addEventListener('click', (e) => {
+        iElem.modalCtn.classList.add('hidden')
+    })
+    
+    cards.forEach(card => {
+        card.addEventListener('click', (e) =>{
+            if(e.target.id === null){
+                return //ignore
+            } else{
+                iElem.modalCtn.classList.remove('hidden')
+            }
+            
+        })
+    })
+}
 
-    // eventListeners
-    function initEventListeners(){
-        const cards = document.querySelectorAll(".card") 
-        
-        searchBtn.addEventListener('click', () => {
-            getNASAPics()
-        })
-        
-        startDateBtn.addEventListener('input', (e) => {
-            startDate = e.target.value 
-        })
+async function getNASAPics() {
+    let response;
+    let nasaData = dataConfig.nasaData
+    const apiKey = dataConfig.API_KEY
+    const loadingIcon = iElem.loadingIcon.classList;
+    let startDate = dataConfig.startDate;
+    let endDate = dataConfig.endDate;
+    
 
-        endDateBtn.addEventListener('input', (e) => {
-            endDate = e.target.value 
-        })
-        
-        closeModalBtn.addEventListener('click', (e) => {
-            modalCtn.classList.add('hidden')
-        })
-        
-        cards.forEach(card => {
-            card.addEventListener('click', (e) =>{
-                if(e.target.id === null){
-                    return //ignore
-                } else{
-                    modalCtn.classList.remove('hidden')
-                }
-                
-            })
-        })
 
+    loadingIcon.toggle('hidden')
+    let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=false&thumbs=false&start_date=${startDate}&end_date=${endDate}`;
+    try {
+        console.log(url)
+        response = await fetch(url);
+        nasaData = await response.json();
+        toast.success();
+    } catch (error){
+        console.error(error)
+        toast.fail(error)
     }
 
+    loadingIcon.toggle('hidden')
 
+    try{
+        console.log(nasaData)
+        generateCards(nasaData);
+    } catch (e) {console.error(e)}
+
+    
+}
+
+function checkDates(startDate, endDate){
+    if(!startDate || !endDate ){
+        alert('cannot have empty dates');
+
+        //highlight error
+        startDateBtn.parentElement.classList.toggle("bg-red-500/50")
+        setTimeout(()=>{
+            startDateBtn.parentElement.classList.toggle("bg-red-500/50")
+        }, 3000)
+
+        return false;
+    } else{
+        return true;
+    }
 }
 
 function generateCards(arr){
+
+    if(Array.isArray(arr)){
+        console.log(arr)
+        // throw new Error(`${arr} is not an array`)
+    }
+
     const appContents = document.querySelector("#app-contents")
 
     //empty out contents
@@ -166,13 +206,15 @@ function initNewCardListeners(cardElements){
                 return //ignore
             } else{
                 loadModal(e.target.parentElement.id)
-                modalCtn.classList.remove('hidden')
+                iElem.modalCtn.classList.remove('hidden')
             }
         })
     })
 }
 
 function loadModal(id){
+    const nasaData = dataConfig.nasaData
+
     console.log(nasaData[id])
 
     // data check on author
@@ -192,10 +234,4 @@ function loadModal(id){
                 `
 
 }
-
-
-
-
-
-
 
