@@ -2,7 +2,7 @@
 */
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    // init();
+    init();
     console.log('DOM fully loaded and parsed');
 });
 
@@ -22,6 +22,7 @@ const interactiveElements = {
     endDateBtn: `#endDate`,
     searchBtn: `#searchBtn`,
     loadingIcon: `#loading-icon`,
+    scrollToTop: `#scrollToTop`,
 }
 
 // wish I could hide api keys but this is on Github static page (i think there is a way)
@@ -71,7 +72,6 @@ function initQselectors(){
 
 function initEventListeners(){
     const cards = document.querySelectorAll(".card") 
-
 
     iElem.searchBtn.addEventListener('click', () => {
         if(!checkDates(startDate, endDate)){ return } //if empty dates
@@ -132,8 +132,6 @@ async function getNASAPics() {
 
     loadingIcon.toggle('hidden')
     let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=false&thumbs=false&start_date=${startDate}&end_date=${endDate}`;
-
-    console.log(url)
     try {
         response = await fetch(url);
         dataConfig.nasaData = await response.json();
@@ -143,7 +141,6 @@ async function getNASAPics() {
         toast.fail(error)
     }
     loadingIcon.toggle('hidden')
-
     generateCards(dataConfig.nasaData);
 
 }
@@ -214,11 +211,7 @@ function initNewCardListeners(cardElements){
 
 function loadModal(id){  
     let nasaData = dataConfig.nasaData
-
-    // data check on author
     let author = nasaData?.[id]?.hasOwnProperty('copyright') ? nasaData[id].copyright : 'Unknown';
-
-    console.log(nasaData)
 
     iElem.modalContents.innerHTML = '';
 
@@ -233,5 +226,19 @@ function loadModal(id){
                 <p class="text-left basis-5 px-24 mb-12">${nasaData[id].explanation}</p>
                 `
 
+}
+
+//scroll to top button config ----------------------------------------------------------
+window.onscroll = () => {
+    showScrollToTop()
+}
+function showScrollToTop(){
+    if(document.documentElement.scrollTop > 100){
+        iElem.scrollToTop.classList.remove(`translate-y-20`)
+        iElem.scrollToTop.classList.add(`translate-y-0`)
+    } else {
+        iElem.scrollToTop.classList.add('translate-y-20');
+        iElem.scrollToTop.classList.remove('translate-y-0');
+    }
 }
 
