@@ -93,7 +93,9 @@ function init() {
     function initEventListeners(){
         const cards = document.querySelectorAll(".card") 
         
-        searchBtn.addEventListener('click', getNASAPics())
+        searchBtn.addEventListener('click', () => {
+            getNASAPics()
+        })
         
         startDateBtn.addEventListener('input', (e) => {
             startDate = e.target.value 
