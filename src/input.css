@@ -15,6 +15,15 @@
     transition: .5s ease-in-out;
 }
 
+#bg-img-ctn{
+    /* background-image: url("../public/space1md.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width:100vw; */
+}
+
+
 #body-ctn{
     /* background-color: var(--background1); */
 }

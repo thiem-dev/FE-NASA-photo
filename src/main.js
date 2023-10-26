@@ -74,18 +74,29 @@ function generateCards(arr){
 
     arr.forEach((obj) => {
         appContentsHTML +=`
-            <div class="card col-span-2 max-w-2xl rounded-2xl  overflow-hidden bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl relative">
-                <img src="${obj.url}" alt="${obj.title}" 
-                    class="object-cover w-full">
-                <h1 class="absolute inset-0 text-3xl font-bold">${obj.title}</h1>
-                <div class="text-lg p-1">Date: ${obj.date}</div>
-                <p class="absolute inset-0">Description: ${obj.explanation}</p>
-            </div>
-            `
+                <div class="card group relative col-span-2 max-h-[900px] rounded-2xl overflow-hidden text-center justify-center items-center cursor-pointer bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl 
+                ">
+                    <div class="img-ctn h-96 w-96 block">
+                        <img src="${obj.url}" alt="${obj.title}" 
+                        class="object-cover w-full h-full group-hover:scale-110">
+                    </div>
+            
+                    <div class="curtain absolute inset-0 bg-transparent group-hover:bg-gray-800/80"></div>
+            
+                    <div class="text-ctn absolute inset-0 flex flex-col text-gray-100 px-9 translate-y-[110%] overflow-hidden group-hover:translate-y-[30%]" >
+                        <h1 class="text-3xl font-bold">Title</h1>
+                        <div class="text-lg p-1">Date: ${obj.title}</div>
+                        <p class="overflow-hidden">Description: ${obj.explanation}</p>
+                    </div>
+                </div>
+    
+             `
     })
 
     appContents.innerHTML = appContentsHTML
 }
+
+
 
 
 

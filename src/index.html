@@ -12,9 +12,10 @@
 </head>
 <body>
     
-    <!-- <div class="bg-img-ctn -z-10 w-full h-full blur-md"></div> -->
+    <!-- <div id="bg-img-ctn" class="absolute bg-my-bg object-cover w-[110%] h-[110%] -z-10 blur-sm bg-center"> hello</div> -->
 
     <div id="body-ctn" class="justify-center flex flex-row flex-wrap mx-auto w-full">
+
         <div class="title-ctn w-full my-12 text-center">
             <h1 class="text-amber-800 text-9xl ">NASA Photo of the Day</h1>
             <p class="text-lg mt-10">Instructions: </p>
@@ -25,14 +26,14 @@
         <div class="user-ctn container flex flex-row flex-wrap mt-2 my-4" >
             <!-- <input type="text" id="userInput" placeholder="What do you want to know?" class="basis-3/4 flex-grow bg-slate-100 shadow-md hover:bg-slate-200 h-6 p-5 rounded-l-xl text-center text-lg " > -->
             
-            <div class="date-ctn basis-2/4 flex-grow h-14 p-3 text-center text-lg flex bg-slate-100 justify-evenly">
+            <div class="date-ctn basis-2/4 flex-grow h-14 p-2 text-center text-lg flex justify-evenly gap-3">
                 <label for="start">Start date:</label>
-                <input type="date" id="startDate" name="start" class="basis-1/3 bg-slate-300 shadow-md hover:bg-slate-400 w-full rounded-l-xl" />
+                <input type="date" id="startDate" name="start" class="basis-1/3 bg-slate-300 shadow-md hover:bg-slate-400 w-full rounded-md" />
                 <label for="end">End date:</label>
-                <input type="date" id="endDate" name="end" class="basis-1/3 bg-slate-300 shadow-md hover:bg-slate-400" />
+                <input type="date" id="endDate" name="end" class="basis-1/3 bg-slate-300 shadow-md hover:bg-slate-400 rounded-md" />
             </div>
             
-            <button id="searchBtn" class="basis-1/8 flex-grow rounded-r-xl border-1 bg-white shadow-md hover:bg-slate-200">Generate Space Stuff</button>
+            <button id="searchBtn" class="basis-1/8 flex-grow rounded-xl border-1 bg-gray-100 shadow-md hover:bg-slate-400">Generate Space Stuff</button>
         </div>
 
         <div class="app-ctn m-auto">
@@ -47,30 +48,43 @@
 
                         <div class="curtain absolute inset-0 bg-transparent group-hover:bg-gray-800/80"></div>
 
-                        <div class="text-ctn absolute inset-0 flex flex-col text-gray-100 px-9 translate-y-[120%] overflow-hidden group-hover:translate-y-[30%]" >
+                        <div class="text-ctn absolute inset-0 flex flex-col text-gray-100 px-9 translate-y-[110%] overflow-hidden group-hover:translate-y-[30%]" >
                             <h1 class="text-3xl font-bold">Title</h1>
                             <div class="text-lg p-1">Date: 10-15-2023</div>
                             <p class="overflow-hidden">Description: Atmospheric refraction flattened the solar disk and Atmospheric refraction flattened the solar disk and</p>
                         </div>
                     </div>
 
+                    <div class="card group relative col-span-2 max-h-[900px] rounded-2xl overflow-hidden text-center justify-center items-center cursor-pointer bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl 
+                         ">
+                        <div class="img-ctn h-96 w-96 block">
+                            <img src="https://apod.nasa.gov/apod/image/1412/GeminidMtBalang_wu_960.jpg" alt="nasa image of the day" 
+                            class="object-cover w-full h-full group-hover:scale-110">
+                        </div>
 
+                        <div class="curtain absolute inset-0 bg-transparent group-hover:bg-gray-800/80"></div>
 
-
-                    <div class="card col-span-2 max-w-2xl rounded-2xl overflow-hidden bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl relative">
-                        <!-- <img src="https://apod.nasa.gov/apod/image/1412/GeminidMtBalang_wu_960.jpg" alt="nasa image of the day" 
-                            class="object-cover w-full inset-0"> -->
-                        <h1 class="absolute inset-0 text-3xl font-bold">Title</h1>
-                        <div class="text-lg p-1 absolute inset-0">Date: 10-15-2023</div>
-                        <p class="absolute inset-0">Description: Atmospheric refraction flattened the solar disk and Atmospheric refraction flattened the solar disk and</p>
+                        <div class="text-ctn absolute inset-0 flex flex-col text-gray-100 px-9 translate-y-[110%] overflow-hidden group-hover:translate-y-[30%]" >
+                            <h1 class="text-3xl font-bold">Title</h1>
+                            <div class="text-lg p-1">Date: 10-15-2023</div>
+                            <p class="overflow-hidden">Description: Atmospheric refraction flattened the solar disk and Atmospheric refraction flattened the solar disk and</p>
+                        </div>
                     </div>
 
-                    <div class="card col-span-2 max-w-2xl rounded-2xl overflow-hidden bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl relative">
-                        <!-- <img src="https://apod.nasa.gov/apod/image/2106/IMG_3915.jpg" alt="nasa image of the day" 
-                            class="object-cover w-full inset-0"> -->
-                        <h1 class="absolute inset-0 text-3xl font-bold">Title</h1>
-                        <div class="text-lg p-1 absolute inset-0">Date: 10-15-2023</div>
-                        <p class="absolute inset-0">Description: Atmospheric refraction flattened the solar disk and Atmospheric refraction flattened the solar disk and</p>
+                    <div class="card group relative col-span-2 max-h-[900px] rounded-2xl overflow-hidden text-center justify-center items-center cursor-pointer bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl 
+                         ">
+                        <div class="img-ctn h-96 w-96 block">
+                            <img src="https://apod.nasa.gov/apod/image/2106/IMG_3915.jpg" alt="nasa image of the day" 
+                            class="object-cover w-full h-full group-hover:scale-110">
+                        </div>
+
+                        <div class="curtain absolute inset-0 bg-transparent group-hover:bg-gray-800/80"></div>
+
+                        <div class="text-ctn absolute inset-0 flex flex-col text-gray-100 px-9 translate-y-[110%] overflow-hidden group-hover:translate-y-[30%]" >
+                            <h1 class="text-3xl font-bold">Title</h1>
+                            <div class="text-lg p-1">Date: 10-15-2023</div>
+                            <p class="overflow-hidden">Description: Atmospheric refraction flattened the solar disk and Atmospheric refraction flattened the solar disk and</p>
+                        </div>
                     </div>
 
     
