@@ -47,6 +47,7 @@ const toast = {
     }
 }
 
+
 const iElem = interactiveElements;
 
 
@@ -57,15 +58,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 function init() {
-
-    //init function calls
     initQselectors();
     initEventListeners();
 }
-
-
-
-
 
 
 // utility functions -----------------------------------------------------------------------------------------------------------------------------------
@@ -111,22 +106,27 @@ function initEventListeners(){
     })
 }
 
+function initSampleData(){
+    
+}
+
 async function getNASAPics() {
     let response;
-    let nasaData = dataConfig.nasaData
     const apiKey = dataConfig.API_KEY
     const loadingIcon = iElem.loadingIcon.classList;
     let startDate = dataConfig.startDate;
     let endDate = dataConfig.endDate;
-    
 
+    //wrong dates, don't call
+    if(!checkDates(startDate, endDate)) {return}
 
     loadingIcon.toggle('hidden')
     let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=false&thumbs=false&start_date=${startDate}&end_date=${endDate}`;
+
+    console.log(url)
     try {
-        console.log(url)
         response = await fetch(url);
-        nasaData = await response.json();
+        dataConfig.nasaData = await response.json();
         toast.success();
     } catch (error){
         console.error(error)
@@ -136,22 +136,22 @@ async function getNASAPics() {
     loadingIcon.toggle('hidden')
 
     try{
-        console.log(nasaData)
-        generateCards(nasaData);
+        generateCards(dataConfig.nasaData);
     } catch (e) {console.error(e)}
 
-    
 }
 
 function checkDates(startDate, endDate){
     if(!startDate || !endDate ){
-        alert('cannot have empty dates');
+        alert('missing date information');
 
         //highlight error
-        startDateBtn.parentElement.classList.toggle("bg-red-500/50")
+        iElem.startDateBtn.parentElement.classList.toggle("pulse")
+        iElem.startDateBtn.parentElement.classList.toggle("bg-red-500/50")
         setTimeout(()=>{
-            startDateBtn.parentElement.classList.toggle("bg-red-500/50")
-        }, 3000)
+            iElem.startDateBtn.parentElement.classList.toggle("pulse")
+            iElem.startDateBtn.parentElement.classList.toggle("bg-red-500/50")
+        }, 4000)
 
         return false;
     } else{
@@ -160,11 +160,10 @@ function checkDates(startDate, endDate){
 }
 
 function generateCards(arr){
-
-    if(Array.isArray(arr)){
-        console.log(arr)
-        // throw new Error(`${arr} is not an array`)
-    }
+    // if(Array.isArray(arr)){
+    //     console.log(arr)
+    //     // throw new Error(`${arr} is not an array`)
+    // }
 
     const appContents = document.querySelector("#app-contents")
 
@@ -194,6 +193,7 @@ function generateCards(arr){
     })
 
     appContents.innerHTML = appContentsHTML
+
     const cards = document.querySelectorAll(".card") 
     initNewCardListeners(cards)
 
@@ -212,17 +212,15 @@ function initNewCardListeners(cardElements){
     })
 }
 
-function loadModal(id){
-    const nasaData = dataConfig.nasaData
-
-    console.log(nasaData[id])
+function loadModal(id){  
+    let nasaData = dataConfig.nasaData
 
     // data check on author
     let author = Object.hasOwn(nasaData[id], 'copyright') ? nasaData[id].copyright : 'Unknown'
 
-    modalContents.innerHTML = '';
+    iElem.modalContents.innerHTML = '';
 
-    modalContents.innerHTML = `
+    iElem.modalContents.innerHTML = `
                 <div class="img-ctn basis-12 my-2">
                     <img src="${nasaData[id].url}" alt="nasa image of the day" class="w-[60%] object-cover object-center mx-auto">
                 </div>
