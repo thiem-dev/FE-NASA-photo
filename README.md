@@ -4,12 +4,14 @@
 
 # App Overview
 ### FE-NASA-photo Viewers
-A web app that shows photos published by NASA between X and Y dates.
+A web app that shows photos published by NASA.
 
 
-Link to App: 
+Link to App: https://thiem-dev.github.io/FE-NASA-photo/src/index.html
 
 ## App Info / Features:
+- User can input date range and view photos in those date ranges.
+- Randomly generate 8 photos from any date.
 - 
 
 ## Tech Used: 
