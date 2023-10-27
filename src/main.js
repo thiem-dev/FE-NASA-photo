@@ -129,10 +129,15 @@ async function makeRandomCards(){
     const loadingIcon = iElem.loadingIcon.classList;
 
     loadingIcon.toggle('hidden')
-
     const url = `https://api.nasa.gov/planetary/apod?api_key=${dataConfig.API_KEY}&count=8`
-    let response = await fetch(url)
-    dataConfig.nasaData = await response.json();
+    try{
+        let response = await fetch(url)
+        dataConfig.nasaData = await response.json();
+        toast.success();
+    } catch (error){
+        console.error(error)
+        toast.fail(error)
+    }
 
     generateCards(dataConfig.nasaData);
 
