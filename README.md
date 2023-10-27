@@ -1,17 +1,16 @@
+<img src="https://github.com/thiem-dev/FE-NASA-photo/blob/main/public/nasa-pic-app1.jpg" width="1200" height="500">
 
 
-
-Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem/NextJS13-scott-tut/main/assets/NextJS13-todo-ss1.png" width="1200" height="500">`
 
 # App Overview
-### FE-NASA-photo
+### FE-NASA-photo Viewers
 A web app that shows photos published by NASA between X and Y dates.
 
 
 Link to App: 
 
-## App Info:
-
+## App Info / Features:
+- 
 
 ## Tech Used: 
 - NASA API : https://api.nasa.gov/
