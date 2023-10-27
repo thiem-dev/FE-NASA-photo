@@ -7,7 +7,7 @@
 A web app that shows photos published by NASA.
 
 
-Link to App: https://thiem-dev.github.io/FE-NASA-photo/src/index.html
+Link to App: https://thiem-dev.github.io/FE-NASA-photo/src/main.html
 
 ## App Info / Features:
 - User can input date range and view photos in those date ranges.
