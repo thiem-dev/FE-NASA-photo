@@ -1,4 +1,6 @@
 /* TODO  
+-check for 
+-single date inputs, obj return is different
 */
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -187,6 +189,9 @@ function checkDates(startDate, endDate){
 }
 
 function generateCards(arr){
+
+    console.log(arr)
+
     const appContents = document.querySelector("#app-contents")
 
     //empty out contents
@@ -234,9 +239,22 @@ function initNewCardListeners(cardElements){
     })
 }
 
+
 function loadModal(id){  
     let nasaData = dataConfig.nasaData
     let author = nasaData?.[id]?.hasOwnProperty('copyright') ? nasaData[id].copyright : 'Unknown';
+
+    // // TODO check for video link or image
+    // let fileFormat = nasaData[id].url('.')
+
+    // const videoFormats = ['mp4', 'webm', 'youtube']
+
+
+    // let imgHTML = `<img src="${nasaData[id].url}" alt="nasa image of the day" class="w-[60%] object-cover object-center mx-auto">`
+    // if(nasaData[id].url){
+
+    // }
+
 
     iElem.modalContents.innerHTML = '';
 
