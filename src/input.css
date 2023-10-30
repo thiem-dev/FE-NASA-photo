@@ -24,6 +24,16 @@ video{
     max-height: none;
 }
 
+iframe{
+    min-height: 350px;
+    width: 100vw;
+    /* display:block;
+    margin: auto; */
+}
+
+.img-ctn>iframe{
+    width: auto;
+}
 
 
 

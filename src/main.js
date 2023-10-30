@@ -1,5 +1,5 @@
 /* TODO  
--check for 
+-check for img or video (use includes "youtube")
 -single date inputs, obj return is different
 */
 
@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 function init() {
     initQselectors();
     initEventListeners();
-    makeRandomCards();
+    // makeRandomCards();
 }
 
 
@@ -81,7 +81,7 @@ function initEventListeners(){
     iElem.searchBtn.addEventListener('click', () => {
         if(!checkDates(startDate, endDate)){ return } //if empty dates
 
-        getNASAPics()
+        getNASAPicsByDate()
     })
     
     iElem.startDateBtn.addEventListener('input', (e) => {
@@ -131,7 +131,7 @@ async function makeRandomCards(){
     const loadingIcon = iElem.loadingIcon.classList;
 
     loadingIcon.toggle('hidden')
-    const url = `https://api.nasa.gov/planetary/apod?api_key=${dataConfig.API_KEY}&count=8`
+    const url = `https://api.nasa.gov/planetary/apod?api_key=${dataConfig.API_KEY}&count=12`
     try{
         let response = await fetch(url)
         dataConfig.nasaData = await response.json();
@@ -148,7 +148,8 @@ async function makeRandomCards(){
     
 }
 
-async function getNASAPics() {
+//check for if startDate only, then or if start and end dates. fail just end date
+async function getNASAPicsByDate() {
     let response;
     const apiKey = dataConfig.API_KEY
     const loadingIcon = iElem.loadingIcon.classList;
@@ -188,10 +189,49 @@ function checkDates(startDate, endDate){
     }
 }
 
+// TODO last left off. Check this function
+// if image, return image, if youtube return youtube
+function checkCardLinkType(str, obj){
+
+    const urlParts = str.split('.')
+    const extension = urlParts[urlParts.length - 1]
+
+    let imageryHTML = ``
+
+    if(str.includes('youtube.com')){
+        imageryHTML = `
+                    <iframe
+                        height="500"
+                        src="${obj.url} autoplay=1&mute=1"
+                        title="YouTube video player"
+                        frameborder="0"
+                        data-class="object-fit object-center w-full h-full group-hover:scale-110"
+                    ></iframe>
+                    `
+    } else if(extension === 'webm' || extension === 'mp4'){
+        imageryHTML = `<video
+                            src="${obj.url}" alt="${obj.title} controls"
+                            class="object-cover w-full h-full group-hover:scale-110"> 
+                        </video>
+                        `
+    } else if(extension === 'jpg' || extension === 'gif' || extension === 'png'){
+        imageryHTML = `
+                    <img src="${obj.url}" alt="${obj.title}"
+                    class="object-cover w-full h-full group-hover:scale-110">
+                    `
+    } else {
+        imageryHTML = `
+                    <img src='../public/noImage.jpg' alt="${obj.title}"
+                    class="object-cover w-full h-full group-hover:scale-110">
+                    `
+    }
+
+    return imageryHTML;
+}
+
 function generateCards(arr){
 
     console.log(arr)
-
     const appContents = document.querySelector("#app-contents")
 
     //empty out contents
@@ -203,8 +243,7 @@ function generateCards(arr){
                 <div id="${index}" class="card group relative col-span-2 max-h-[900px] rounded-2xl overflow-hidden text-center justify-center items-center cursor-pointer bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl 
                 ">
                     <div class="img-ctn h-96 w-96 block">
-                        <img src="${obj.url}" alt="${obj.title}" 
-                        class="object-cover w-full h-full group-hover:scale-110">
+                        ${checkCardLinkType(obj.url, obj)}
                     </div>
             
                     <div class="curtain absolute inset-0 bg-transparent group-hover:bg-gray-800/80"></div>
@@ -244,23 +283,11 @@ function loadModal(id){
     let nasaData = dataConfig.nasaData
     let author = nasaData?.[id]?.hasOwnProperty('copyright') ? nasaData[id].copyright : 'Unknown';
 
-    // // TODO check for video link or image
-    // let fileFormat = nasaData[id].url('.')
-
-    // const videoFormats = ['mp4', 'webm', 'youtube']
-
-
-    // let imgHTML = `<img src="${nasaData[id].url}" alt="nasa image of the day" class="w-[60%] object-cover object-center mx-auto">`
-    // if(nasaData[id].url){
-
-    // }
-
-
     iElem.modalContents.innerHTML = '';
 
     iElem.modalContents.innerHTML = `
-                <div class="img-ctn basis-12 my-2">
-                    <img src="${nasaData[id].url}" alt="nasa image of the day" class="w-[60%] object-cover object-center mx-auto">
+                <div class="img-ctn basis-11/12 mt-8 w-[50vw] mx-auto">
+                    ${checkModalLinkType(nasaData[id].url, nasaData[id])}
                 </div>
                 
                 <h1 class="text-xl md:text-3xl basis-12">${nasaData[id].title}</h1>
@@ -269,6 +296,41 @@ function loadModal(id){
                 <p class="text-left basis-5 px-24 mb-12">${nasaData[id].explanation}</p>
                 `
 
+}
+
+function checkModalLinkType(urlStr, obj){
+    
+    const urlParts = urlStr.split('.')
+    const extension = urlParts[urlParts.length - 1]
+
+    let imageryHTML = ``
+
+    if(urlStr.includes('youtube.com')){
+        imageryHTML = `
+                    <iframe
+                        height="500"
+                        src="${urlStr} autoplay=1&mute=1"
+                        title="YouTube video player"
+                        frameborder="0"
+                        data-class="object-fit "
+                    ></iframe>
+                    `
+    } else if(extension === 'webm' || extension === 'mp4'){
+        imageryHTML = `<video
+                            src="${urlStr}" alt="${obj.title} controls"
+                            class="object-cover w-[70vw]"> 
+                        </video>
+                        `
+    } else if(extension === 'jpg' || extension === 'gif' || extension === 'png'){
+        imageryHTML = `<img src="${urlStr}" alt="nasa image of the day" class="object-cover w-[70vw]"> `
+    } else {
+        imageryHTML = `
+                    <img src='../public/noImage.jpg' alt="${obj.title}"
+                    class="object-cover w-[70vw]">
+                    `
+    }
+
+    return imageryHTML;
 }
 
 //scroll to top button config ----------------------------------------------------------
