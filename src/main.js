@@ -120,10 +120,10 @@ async function makeRandomCards(){
     const url = `https://api.nasa.gov/planetary/apod?api_key=${dataConfig.API_KEY}&count=12`
     try{
         let response = await fetch(url)
-
-        if(!response.okay){
+        if(!response.ok){
             throw new Error("Invalid Data. Check dates")
         }
+
         dataConfig.nasaData = await response.json();
         generateCards(dataConfig.nasaData);
         toast.success();
@@ -153,7 +153,7 @@ async function getNASAPicsByDates() {
     let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=false&thumbs=false&start_date=${startDate}&end_date=${endDate}`;
     try {
         response = await fetch(url);
-        if(!response.okay){
+        if(!response.ok){
             throw new Error("Invalid Data. Check dates")
         }
 
