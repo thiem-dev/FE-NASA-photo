@@ -18,21 +18,27 @@ html{
 *{
     transition: .75s ease-in-out;
 }
+body{
+
+    padding:1rem;
+}
 
 video{
     max-width:none;
     max-height: none;
 }
 
-iframe{
-    min-height: 350px;
-    width: 100vw;
-    /* display:block;
-    margin: auto; */
+
+#modal-contents iframe{
+    min-height: 400px;
+    margin: 1rem auto;
 }
 
+/* card iframe */
 .img-ctn>iframe{
-    width: auto;
+    height: 100%;
+    width: 100%;
+    margin:0 auto;
 }
 
 

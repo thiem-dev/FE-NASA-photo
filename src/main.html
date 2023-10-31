@@ -13,10 +13,10 @@
 </head>
 <body>
 
-    <video autoplay loop muted id="bgvideo" class="-z-50 fixed top-0 left-0 h-auto w-[300%] lg:w-[150%] overflow-hidden">
+    <video autoplay loop muted id="bgvideo" class="-z-50 fixed top-0 left-0 min-h-full min-w-full overflow-hidden">
         <source src="../public/The_Earth_in_480p.webm" class="object-cover object-center w-[110%] h-[110%]">
     </video>
-    <div class="curtain fixed bg-black opacity-60 w-[110%] h-[110%]"></div>
+    <div id="video-curtain" class="curtain fixed bg-black opacity-60 w-[110%] h-auto"></div>
 
 
     <div id="modal-ctn" class="fixed z-10 bg-gray-900/90 w-full h-full flex flex-col flex-nowrap text-center text-white justify-self-center top-0 left-0 overflow-y-scroll hidden">
@@ -35,29 +35,29 @@
     </div> <!-- modal-ctn -->
 
 
-    <div id="body-ctn" class="justify-center flex flex-row flex-wrap mx-auto w-full h-full relative">
+    <div id="body-ctn" class="overflow-hidden justify-center flex flex-row flex-wrap mx-auto w-full h-full relative">
 
         <div id="volumeBtn" class="absolute top-1 right-3 w-[100px] h-[100px] hidden">
             <img src="../public/volume.svg" alt="volume button" class="invert">
         </div>
 
         <div id="title-ctn" class="w-full my-12 text-center ">
-            <h1 class="text-9xl myText-gradient font-semibold font-sans">NASA PHOTOS</h1>
-            <p class="text-4xl mt-10 text-gray-300/50">Find images that are out of this world </p>
+            <h1 class="text-5xl md:text-9xl myText-gradient font-semibold font-sans">NASA PHOTOS</h1>
+            <p class="text-2xl md:text-4xl mt-10 text-gray-300/50">Find images that are out of this world </p>
         </div>
 
-        <div class="input-ctn w-10/12 flex flex-row flex-wrap mt-2 my-4 gap-8 rounded-md justify-center" >  
+        <div class="input-ctn basis-full flex flex-row flex-wrap mt-2 my-4 gap-8 rounded-md justify-center" >  
 
-            <div class="date-ctn basis-2/4 flex-grow h-14 p-2 text-center lg:text-2xl text-md flex justify-evenly gap-3 rounded-xl ">
-                <label class="text-white" for="start">Start date:</label>
-                <input  type="date" id="startDate" name="start" class="basis-1/3 border-gray-100/75 border-1 opacity-50 bg-gray-500 text-white hover:opacity-90 w-full rounded-lg p-3 pt-2" />
-                <label class="text-white" for="end">End date:</label>
-                <input  type="date" id="endDate" name="end" class="basis-1/3 border-gray-100/75 border-1 opacity-50 bg-gray-500 text-white hover:opacity-90 w-full rounded-lg p-3 pt-2" />
+            <div class="date-ctn basis-full md:basis-2/4 flex-grow h-14 p-2 text-center text-sm lg:text-2xl text-md flex justify-evenly gap-3 rounded-xl ">
+                <label class="text-white basis-11/12 md:basis-1/3" for="start">Start date:</label>
+                <input  type="date" id="startDate" name="start" class="h-12 basis-11/12  md:basis-1/3 border-gray-100/75 border-1 opacity-50 bg-gray-500 text-white hover:opacity-90 w-full rounded-lg p-3 pt-2" />
+                <label class="text-white basis-11/12 md:basis-1/3 for="end">End date:</label>
+                <input  type="date" id="endDate" name="end" class="h-12 basis-11/12 md:basis-1/3 border-gray-100/75 border-1 opacity-50 bg-gray-500 text-white hover:opacity-90 w-full rounded-lg p-3 pt-2" />
             </div>
 
-            <button id="searchBtn" class="basis-2/12 flex-grow rounded-xl border-1 bg-gray-500/50 text-white hover:bg-gray-500/90 font-bold text-lg p-3">Search Dates</button>
+            <button id="searchBtn" class="basis-11/12 md:basis-2/12 flex-grow rounded-xl border-1 bg-gray-500/50 text-white hover:bg-gray-500/90 font-bold text-lg p-3">Search Dates</button>
         
-            <button id="randomBtn" class="basis-2/12 flex-grow rounded-xl border-1 bg-gray-500/50 text-white hover:bg-gray-500/90 font-bold text-lg p-5">Randomize</button>
+            <button id="randomBtn" class="basis-11/12 md:basis-2/12 flex-grow rounded-xl border-1 bg-gray-500/50 text-white hover:bg-gray-500/90 font-bold text-lg p-5">Randomize</button>
             
         </div>
 
@@ -88,7 +88,7 @@
 
                 <div id="1" class="card group relative col-span-2 max-h-[900px] rounded-2xl overflow-hidden text-center justify-center items-center cursor-pointer bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl 
                         ">
-                    <div class="img-ctn h-96 w-96 block">
+                    <div class="img-ctn h-96 w-96">
                         <img src="https://apod.nasa.gov/apod/image/2106/IMG_3915.jpg" alt="nasa image of the day" 
                         class="object-cover w-full h-full group-hover:scale-110">
                     </div>
@@ -99,6 +99,21 @@
                         <h1 class="text-3xl font-bold">Title</h1>
                         <div class="text-lg p-1">Date: 10-15-2023</div>
                         <p class="overflow-hidden">Description: Atmospheric refraction flattened the solar disk and Atmospheric refraction flattened the solar disk and</p>
+                    </div>
+                </div>
+
+                <div id="3" class="card group relative col-span-2 max-h-[900px] rounded-2xl overflow-hidden text-center justify-center items-center cursor-pointer bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-xl 
+                ">
+                    <div class="img-ctn h-96 w-96 relative ">
+                        <iframe src="https://www.youtube.com/embed/J3_88eyN44w?rel=0 autoplay=1&amp;mute=1" title="YouTube video player" frameborder="0" data-class="object-cover w-full h-full group-hover:scale-110"></iframe>
+                    </div>
+            
+                    <div class="curtain absolute inset-0 bg-transparent group-hover:bg-gray-800/80"></div>
+            
+                    <div class="text-ctn absolute inset-0 flex flex-col text-gray-100 px-9 translate-y-[110%] overflow-hidden group-hover:translate-y-[30%]">
+                        <h1 class="text-3xl font-bold">Gone in 60 Seconds: A Green Flash Sunset</h1>
+                        <div class="text-lg p-1">Date: 2023-10-25</div>
+                        <p class="overflow-hidden">Description: In 60 seconds, this setting Sun will turn green. Actually, the top of the Sun already appears not only green, but wavey -- along with all of its edges. The Sun itself is unchanged -- both effects are caused by looking along hot and cold layers in Earth's atmosphere.  The unusual color is known as a green flash and occurs because these atmospheric layers not only shift background images but disperse colors into slightly different directions, like a prism.  The featured video was captured earlier this month off the coast of Hawaii, USA. After waiting those 60 seconds, at the video's end, the upper part of the Sun seems to hover alone in space, while turning not only green, but blue.  Then suddenly, the Sun appears to shrink to nothing -- only to return tomorrow.</p>
                     </div>
                 </div>
 

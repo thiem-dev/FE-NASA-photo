@@ -308,11 +308,11 @@ function checkModalLinkType(urlStr, obj){
     if(urlStr.includes('youtube.com')){
         imageryHTML = `
                     <iframe
-                        height="500"
+                        height="800"
                         src="${urlStr} autoplay=1&mute=1"
                         title="YouTube video player"
                         frameborder="0"
-                        data-class="object-fit "
+                        allowfullscreen
                     ></iframe>
                     `
     } else if(extension === 'webm' || extension === 'mp4'){
