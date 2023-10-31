@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 function init() {
     initQselectors();
     initEventListeners();
-    // makeRandomCards();
+    makeRandomCards();
 }
 
 
@@ -51,9 +51,9 @@ const toast = {
             }
             }).showToast()
     },
-    fail: () => {
+    fail: (error) => {
         Toastify({
-            text: `Error with getting pics ${error.name}`,
+            text: `${error}`,
             duration: 3000,
             gravity: "top",
             close: true,
@@ -81,7 +81,7 @@ function initEventListeners(){
     iElem.searchBtn.addEventListener('click', () => {
         if(!checkDates(startDate, endDate)){ return } //if empty dates
 
-        getNASAPicsByDate()
+        getNASAPicsByDates()
     })
     
     iElem.startDateBtn.addEventListener('input', (e) => {
@@ -95,20 +95,6 @@ function initEventListeners(){
     
     iElem.closeModalBtn.addEventListener('click', (e) => {
         iElem.modalCtn.classList.add('hidden')
-    })
-
-    // // TODO
-    iElem.volumeBtn.addEventListener('click', (e) => {
-        console.log(`volume clicked`)
-        iElem.bgvideo.muted = true;
-        // if(iElem.bgvideo.volume === 0){
-        //     iElem.bgvideo.volume = 1
-        // }else{
-        //     iElem.bgvideo.volume = 0
-        // }
-
-
-        
     })
 
     iElem.randomBtn.addEventListener(`click`, (e) =>{
@@ -134,14 +120,18 @@ async function makeRandomCards(){
     const url = `https://api.nasa.gov/planetary/apod?api_key=${dataConfig.API_KEY}&count=12`
     try{
         let response = await fetch(url)
+
+        if(!response.okay){
+            throw new Error("Invalid Data. Check dates")
+        }
         dataConfig.nasaData = await response.json();
+        generateCards(dataConfig.nasaData);
         toast.success();
     } catch (error){
         console.error(error)
         toast.fail(error)
     }
 
-    generateCards(dataConfig.nasaData);
 
 
     loadingIcon.toggle('hidden')
@@ -149,7 +139,7 @@ async function makeRandomCards(){
 }
 
 //check for if startDate only, then or if start and end dates. fail just end date
-async function getNASAPicsByDate() {
+async function getNASAPicsByDates() {
     let response;
     const apiKey = dataConfig.API_KEY
     const loadingIcon = iElem.loadingIcon.classList;
@@ -163,14 +153,18 @@ async function getNASAPicsByDate() {
     let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&hd=false&thumbs=false&start_date=${startDate}&end_date=${endDate}`;
     try {
         response = await fetch(url);
+        if(!response.okay){
+            throw new Error("Invalid Data. Check dates")
+        }
+
         dataConfig.nasaData = await response.json();
+        generateCards(dataConfig.nasaData);
         toast.success();
     } catch (error){
         console.error(error)
         toast.fail(error)
     }
     loadingIcon.toggle('hidden');
-    generateCards(dataConfig.nasaData);
 }
 
 function checkDates(startDate, endDate){
@@ -189,8 +183,7 @@ function checkDates(startDate, endDate){
     }
 }
 
-// TODO last left off. Check this function
-// if image, return image, if youtube return youtube
+
 function checkCardLinkType(str, obj){
 
     const urlParts = str.split('.')
@@ -230,8 +223,6 @@ function checkCardLinkType(str, obj){
 }
 
 function generateCards(arr){
-
-    console.log(arr)
     const appContents = document.querySelector("#app-contents")
 
     //empty out contents
