@@ -3,16 +3,18 @@
 
 
 # App Overview
-### FE-NASA-photo Viewers
-A web app that shows photos published by NASA.
+### FE-NASA-GRAM Viewers
+A web app that displays photos and videos published by NASA.
 
 
 Link to App: https://thiem-dev.github.io/FE-NASA-photo/src/main.html
 
 ## App Info / Features:
-- User can input date range and view photos in those date ranges.
-- Randomly generate 8 photos from any date.
-- 
+- User can input date range and view photos within valid user defined date ranges.
+- Randomly generate 12 photos from any date.
+- Click image cards and read more about photo/video
+- Mobile responsive design
+- Full error handling with try catch and toast messages on success/fail states
 
 ## Tech Used: 
 - NASA API : https://api.nasa.gov/
